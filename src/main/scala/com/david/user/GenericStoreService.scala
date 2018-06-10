@@ -43,8 +43,7 @@ trait StoreService[T <: UUIDable] {
       if (exists(id)) {
         items -= (id)
         true
-      }
-      else {
+      } else {
         false
       }
     )
@@ -52,7 +51,7 @@ trait StoreService[T <: UUIDable] {
 
   def get(id: String): Future[Option[T]] = Future(items.get(id))
 
-  def keys : Future[Seq[String]] = Future(items.keys.toSeq)
+  def keys: Future[Seq[String]] = Future(items.keys.toSeq)
 
   private def exists(id: String): Boolean = items.contains(id)
 

@@ -11,7 +11,7 @@ as any update in the organization would require to update all the users that bel
 * Usage
 
         sbt docker:publishLocal
-        docker run --rm -p8080:8080 bank-api:0.0.1-SNAPSHOT
+        docker run --rm -p8080:8080 users-api:0.0.1-SNAPSHOT
 
 * Endpoints
 
@@ -37,4 +37,11 @@ as any update in the organization would require to update all the users that bel
  Thats why, User and Organisation case classes extends UUIDable
 
  All the important domain can be found in the Domain object.
+ 
+ Spray considerations. It couldnt be used format5 and format8 in the Organisation and User case classes to serialize and deserialize. 
+ As there was an attribute in the json output format named "type", I had to do a custom relationship between the json attributes and the case classes. (Check the jsonSupport object)
+ 
 
+* Postman
+
+ All the endpoints have been tested by the Scala Spec and as well using postman. The postman file has been included. It can be imported and tried.

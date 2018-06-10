@@ -2,15 +2,13 @@ package com.david.user
 
 import java.util.logging.Logger
 
-import akka.actor.{ActorRef, ActorSystem, Props}
-import akka.http.scaladsl.server.{HttpApp, Route}
+import akka.actor.{ ActorRef, ActorSystem, Props }
+import akka.http.scaladsl.server.{ HttpApp, Route }
 import akka.stream.ActorMaterializer
 import akka.util.Timeout
 
 import scala.concurrent.duration._
-object QuickstartServer extends HttpApp with App  with UserRoutes  {
-  // Required by the `ask` (?) method below
-
+object QuickstartServer extends HttpApp with App with UserRoutes {
   val logger = Logger.getLogger(QuickstartServer.getClass.getName)
   logger.info("Initializating Server")
   // set up ActorSystem and other dependencies here

@@ -1,20 +1,18 @@
 package com.david.user
 
-import akka.actor.{ActorRef, ActorSystem}
+import akka.actor.{ ActorRef, ActorSystem }
 import akka.event.Logging
 import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
-import akka.http.scaladsl.server.directives.MethodDirectives.{get, post}
+import akka.http.scaladsl.server.directives.MethodDirectives.{ get, post }
 import akka.http.scaladsl.server.directives.PathDirectives.path
 import akka.http.scaladsl.server.directives.RouteDirectives.complete
 import akka.pattern.ask
 import akka.util.Timeout
-import com.david.user.UserActor.{CreateUser, DeleteUser, GetUser, GetUsers, UpdateUser}
+import com.david.user.UserActor.{ CreateUser, DeleteUser, GetUser, GetUsers, UpdateUser }
 
 import scala.concurrent.Future
-
-
 
 trait UserRoutes extends JsonSupport {
   import Domain._

@@ -1,11 +1,8 @@
 package com.david.user
 
-import akka.actor.{Actor, ActorLogging, ActorRef, Props}
+import akka.actor.{ Actor, ActorLogging, ActorRef, Props }
 
 import Domain._
-
-
-//#user-case-classes
 
 object UserActor {
   final case object GetUsers
@@ -16,11 +13,9 @@ object UserActor {
   def props: Props = Props[UserActor]
 }
 
-
 class UserActor extends Actor with ActorLogging {
   import UserActor._
   import FullUserService._
-
 
   def receive: Receive = {
     case GetUsers =>
@@ -36,4 +31,3 @@ class UserActor extends Actor with ActorLogging {
       sender() ! deleteUser(id)
   }
 }
-//#user-registry-actor

@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "a29f52de-5582-4624-937c-dae77d66b694",
+		"name": "Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUserEmptyOrganisation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n   \"firstname\":\"David\",\n   \"lastname\":\"Virgil\",\n   \"salutation\":\"MR\",\n   \"address\":{  \n      \"number\":\"189A\",\n      \"city\":\"London\",\n      \"country\":\"UK\",\n      \"postalCode\":\"WK134\",\n      \"street\":\"Street name\"\n   },\n   \"telephone\":\"+447956801230\",\n   \"type\":\"genericUser\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUserWithOrganisation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n   \"organization\":{  \n      \"name\":\"MyOrganization\",\n      \"email\":\"myorganization@gmail.com\",\n      \"address\":{  \n         \"number\":\"189A\",\n         \"city\":\"London\",\n         \"country\":\"UK\",\n         \"postalCode\":\"WK134\",\n         \"street\":\"Street name\"\n      },\n      \"type\":\"+44565896558\"\n   },\n   \"firstname\":\"David\",\n   \"lastname\":\"Virgil\",\n   \"salutation\":\"MR\",\n   \"address\":{  \n      \"number\":\"189A\",\n      \"city\":\"London\",\n      \"country\":\"UK\",\n      \"postalCode\":\"WK134\",\n      \"street\":\"Street name\"\n   },\n   \"telephone\":\"+447956801230\",\n   \"type\":\"genericUser\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organization\": {\n        \"name\": \"MyOrganization\",\n        \"email\": \"myorganization@gmail.com\",\n        \"id\": \"6f80799e-90ab-445b-8771-2c769cf6cb6b\",\n        \"address\": {\n            \"number\": \"189A\",\n            \"city\": \"London\",\n            \"country\": \"UK\",\n            \"postalCode\": \"WK134\",\n            \"street\": \"Street name\"\n        },\n        \"type\": \"+44565896558\"\n    },\n    \"firstname\": \"Manuel\",\n    \"lastname\": \"Virgil\",\n    \"id\": \"cc905956-f26f-4ec9-8752-4a1794c3721a\",\n    \"salutation\": \"MR\",\n    \"address\": {\n        \"number\": \"189A\",\n        \"city\": \"London\",\n        \"country\": \"UK\",\n        \"postalCode\": \"WK134\",\n        \"street\": \"Street name\"\n    },\n    \"telephone\": \"+447956801230\",\n    \"type\": \"genericUser\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/cc905956-f26f-4ec9-8752-4a1794c3721a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"cc905956-f26f-4ec9-8752-4a1794c3721a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUser",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/users/cc905956-f26f-4ec9-8752-4a1794c3721a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"cc905956-f26f-4ec9-8752-4a1794c3721a"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

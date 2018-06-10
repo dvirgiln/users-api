@@ -1,7 +1,7 @@
 package com.david.user
 
-import com.david.user.Domain.{Address, _}
-import spray.json.{DeserializationException, JsString, RootJsonFormat, _}
+import com.david.user.Domain.{ Address, _ }
+import spray.json.{ DeserializationException, JsString, RootJsonFormat, _ }
 
 //#json-support
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
@@ -23,8 +23,10 @@ trait JsonSupport extends SprayJsonSupport {
   }
   implicit val enumConverter = new EnumJsonConverter(UserSalutation)
   implicit val addressJsonFormat = jsonFormat5(Address)
-  implicit val organisationJsonFormat = jsonFormat5(Organisation)
-  implicit val userWithOrganisationJsonFormat = jsonFormat8(UserWithOrganisation)
+  //Required to materialize the json conversion between the fields that are named type
+  implicit val organisationJsonFormat = jsonFormat(Organisation.apply, "id", "name", "email", "type", "address")
+  implicit val userWithOrganisationJsonFormat = jsonFormat(UserWithOrganisation.apply, "id", "firstname", "lastname",
+    "salutation", "telephone", "type", "address", "organization")
   implicit val usersWithOrganisationJsonFormat = jsonFormat1(UsersWithOrganisation)
 
 }

@@ -2,12 +2,12 @@ package com.david.user
 
 import akka.actor.ActorRef
 import akka.http.scaladsl.marshalling.Marshal
-import akka.http.scaladsl.model.{ContentTypes, HttpRequest, MessageEntity, StatusCodes}
+import akka.http.scaladsl.model.{ ContentTypes, HttpRequest, MessageEntity, StatusCodes }
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import akka.util.Timeout
-import com.david.user.Domain.{Address, Organisation, UserSalutation, UserWithOrganisation}
+import com.david.user.Domain.{ Address, Organisation, UserSalutation, UserWithOrganisation }
 import org.scalatest.concurrent.ScalaFutures
-import org.scalatest.{BeforeAndAfterAll, Matchers, WordSpec}
+import org.scalatest.{ BeforeAndAfterAll, Matchers, WordSpec }
 
 import scala.concurrent.duration._
 
@@ -47,7 +47,7 @@ class UserRoutesSpec extends WordSpec with Matchers with ScalaFutures with Scala
         val returnValue = entityAs[UserWithOrganisation]
         assert(checkEqualsUsers(returnValue, user, false) == true)
         assert(returnValue.id != None)
-        returnValue.organization should ===( user.organization)
+        returnValue.organization should ===(user.organization)
       }
     }
 
@@ -61,7 +61,8 @@ class UserRoutesSpec extends WordSpec with Matchers with ScalaFutures with Scala
         status should ===(StatusCodes.Created)
         contentType should ===(ContentTypes.`application/json`)
         val returnValue = entityAs[UserWithOrganisation]
-        val equalsUsers= checkEqualsUsers(returnValue, user, false)
+        val fdsadf = entityAs[String]
+        val equalsUsers = checkEqualsUsers(returnValue, user, false)
         equalsUsers shouldBe true
         assert(returnValue.id != None)
         assert(returnValue.organization != None)
@@ -86,7 +87,6 @@ class UserRoutesSpec extends WordSpec with Matchers with ScalaFutures with Scala
       }
     }
 
-
     "add one user with and update an existing organization (POST /users)" in {
       val organisation = Organisation(None, "MyOrganization", "myorganization@gmail.com", "+44565896558", address)
       val user = UserWithOrganisation(None, "David", "Virgil", UserSalutation.MR, "+447956801230", "genericUser", address, Some(organisation))
@@ -96,15 +96,15 @@ class UserRoutesSpec extends WordSpec with Matchers with ScalaFutures with Scala
         status should ===(StatusCodes.Created)
         contentType should ===(ContentTypes.`application/json`)
         val returnValue = entityAs[UserWithOrganisation]
-        val equalsUsers= checkEqualsUsers(returnValue, user, false)
+        val equalsUsers = checkEqualsUsers(returnValue, user, false)
         equalsUsers shouldBe true
         assert(returnValue.id != None)
         assert(checkEqualOrganisation(organisation, returnValue.organization.get, false) == true)
         assert(returnValue.organization.get.id != None)
 
         //SECOND CALL, UPDATE OF ORGANISATION CREATING A SECOND USER
-        val updatedOrganisation= returnValue.organization.get.copy(name= "UpdatedOrg")
-        val user2= user.copy(firstname = "Marius", organization = Some(updatedOrganisation))
+        val updatedOrganisation = returnValue.organization.get.copy(name = "UpdatedOrg")
+        val user2 = user.copy(firstname = "Marius", organization = Some(updatedOrganisation))
         val userEntity2 = Marshal(user2).to[MessageEntity].futureValue
         val request2 = Post(uri = "/users").withEntity(userEntity2)
         request2 ~> routes ~> check {
@@ -149,7 +149,7 @@ class UserRoutesSpec extends WordSpec with Matchers with ScalaFutures with Scala
     }
 
     "return an error when it is tried to delete a non existing user" in {
-        Delete(uri = s"/users/fdsdfs") ~> routes ~> check {
+      Delete(uri = s"/users/fdsdfs") ~> routes ~> check {
         status should ===(StatusCodes.NotFound)
       }
     }
@@ -171,10 +171,7 @@ class UserRoutesSpec extends WordSpec with Matchers with ScalaFutures with Scala
         }
       }
 
-
     }
-
-
 
     "update user details in case user exist already (PUT /users)" in {
       val organisation = Organisation(None, "MyOrganization", "myorganization@gmail.com", "+44565896558", address)
@@ -221,11 +218,11 @@ class UserRoutesSpec extends WordSpec with Matchers with ScalaFutures with Scala
 
   private def checkEqualsUsers(a: UserWithOrganisation, b: UserWithOrganisation, checkId: Boolean): Boolean = {
     a.firstname == b.firstname &&
-    a.lastname == b.lastname &&
-    a.salutation == b.salutation &&
-    a.address == b.address &&
-    a.telephone == b.telephone &&
-    a.typeUser == b.typeUser && (!checkId || (a.id == b.id))
+      a.lastname == b.lastname &&
+      a.salutation == b.salutation &&
+      a.address == b.address &&
+      a.telephone == b.telephone &&
+      a.typeUser == b.typeUser && (!checkId || (a.id == b.id))
   }
 
   private def checkEqualOrganisation(a: Organisation, b: Organisation, checkId: Boolean): Boolean = {
